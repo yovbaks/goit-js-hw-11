@@ -4,17 +4,22 @@ import PixabeyService from './js/pixabeyService';
 import { Notify } from 'notiflix';
 import LoadMoreBtn from './js/loadMore';
 import renderGallery from './js/renderImages';
+import SimpleLightbox from 'simplelightbox';
+
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 const refs = {
   searchForm: document.querySelector('.search-form'),
   articlesContainer: document.querySelector('.js-articles-container'),
 };
 
+
 const apiService = new PixabeyService();
 const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
   hidden: true,
 });
+const gallery = new SimpleLightbox(".gallery__link", {});
 
 apiService.fetchImage().then(images => {
   console.log(images);
@@ -31,6 +36,7 @@ function onSearch(e) {
   if (apiService.query === '') {
     return Notify.failure('Enter some text');
   }
+ 
   loadMoreBtn.show();
 
   apiService.resetPage();
@@ -49,6 +55,7 @@ function fetchImages() {
 
     const markup = renderGallery(images);
     refs.articlesContainer.insertAdjacentHTML('beforeend', markup);
+    		gallery.refresh();
     loadMoreBtn.enable();
   });
 }
