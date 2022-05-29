@@ -10,7 +10,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 const refs = {
   searchForm: document.querySelector('.search-form'),
-  articlesContainer: document.querySelector('.js-articles-container'),
+  articlesContainer: document.querySelector('.js-gallery-container'),
 };
 
 
