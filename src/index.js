@@ -36,7 +36,7 @@ function onSearch(e) {
   if (apiService.query === '') {
     return Notify.failure('Enter some text');
   }
- 
+  apiService.showHits();
   loadMoreBtn.show();
 
   apiService.resetPage();

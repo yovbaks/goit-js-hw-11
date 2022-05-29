@@ -1,4 +1,6 @@
-const API_KEY ='27661968-fba717fb37b630c6286acce7d'
+import { Notify } from 'notiflix';
+
+const API_KEY = '27661968-fba717fb37b630c6286acce7d'
 const BASE_URL = 'https://pixabay.com/api/'
 
     
@@ -18,11 +20,16 @@ export default class PixabeyService {
     return fetch(URL)
       .then(response => response.json())
       .then(({ hits, totalHits }) => {
-    
+            
         this.incrementPage();
         this.totalHits = totalHits;
+        
         return hits;
+        
       });
+  }
+  showHits() {
+    Notify.info(`We found ${this.totalHits}`);
   }
   incrementPage() {
     this.page += 1;
