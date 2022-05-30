@@ -6,24 +6,24 @@ import LoadMoreBtn from './js/loadMore';
 import renderGallery from './js/renderImages';
 import SimpleLightbox from 'simplelightbox';
 
-import "simplelightbox/dist/simple-lightbox.min.css";
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const refs = {
   searchForm: document.querySelector('.search-form'),
-  articlesContainer: document.querySelector('.js-gallery-container'),
+  galleryContainer: document.querySelector('.js-gallery-container'),
 };
-
 
 const apiService = new PixabeyService();
 const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
   hidden: true,
 });
-const gallery = new SimpleLightbox(".gallery__link", {});
 
-apiService.fetchImage().then(images => {
-  console.log(images);
-});
+const gallery = new SimpleLightbox('.gallery__link', {});
+
+// apiService.fetchImage().then(images => {
+//   console.log(images);
+// });
 
 refs.searchForm.addEventListener('submit', onSearch);
 loadMoreBtn.refs.button.addEventListener('click', fetchImages);
@@ -36,35 +36,48 @@ function onSearch(e) {
   if (apiService.query === '') {
     return Notify.failure('Enter some text');
   }
-  apiService.showHits();
+  //  Notify.info(`We found ${this.totalHits}`);
+  // apiService.showHits();
+
   loadMoreBtn.show();
 
   apiService.resetPage();
-  clearArticlesMarkup();
+  clearGalleryMarkup();
   fetchImages();
 }
 
 function fetchImages() {
+
   loadMoreBtn.disable();
+
   apiService.fetchImage().then(images => {
     if (images.length === 0) {
       Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
+      loadMoreBtn.hide();
     }
 
     const markup = renderGallery(images);
-    refs.articlesContainer.insertAdjacentHTML('beforeend', markup);
-    		gallery.refresh();
+    refs.galleryContainer.insertAdjacentHTML('beforeend', markup);
+    // apiService.showHits();
+    scroll();
+    gallery.refresh();
     loadMoreBtn.enable();
   });
 }
-// const markup = renderGallery();
-// function appendArticlesMarkup(articles) {
 
-//   refs.articlesContainer.insertAdjacentHTML('beforeend', markup);
-// }
+function clearGalleryMarkup() {
+  refs.galleryContainer.innerHTML = '';
+}
 
-function clearArticlesMarkup() {
-  refs.articlesContainer.innerHTML = '';
+function scroll() {
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 0.5,
+    behavior: 'smooth',
+  });
 }

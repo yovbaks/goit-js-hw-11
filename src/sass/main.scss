@@ -1,9 +1,3 @@
-/*
- * Главный файл стилей.
- * Все паршалы подключаются сюда.
- */
-
-// Стили для файла с примером HTML-фрагмента
 @import './example';
 *,
 *::before,
@@ -25,11 +19,13 @@ img {
 }
 
 .search-form {
+ 
   display: flex;
   justify-content: center;
   padding: 8px;
   margin-bottom: 24px;
 }
+
 
 .button {
   display: block;
