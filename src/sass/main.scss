@@ -23,7 +23,7 @@ img {
   display: flex;
   justify-content: center;
   padding: 8px;
-  margin-bottom: 24px;
+  // margin-bottom: 24px;
 }
 
 
@@ -41,6 +41,9 @@ img {
   display: none;
 }
 
+.form-wrapper{
+  background-color: rgb(94, 74, 155);
+}
 /* Article List */
 .gallery {
   display: grid;
