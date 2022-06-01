@@ -18,8 +18,9 @@ export default class PixabeyService {
 
     if (this.page === 1 && response.data.totalHits !== 0) {
       Notify.info(`We found ${response.data.totalHits}`);
-    this.incrementPage();
+     
     }
+    this.incrementPage();
 
     return response.data.hits;
   }

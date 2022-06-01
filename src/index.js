@@ -21,9 +21,6 @@ const loadMoreBtn = new LoadMoreBtn({
 
 const gallery = new SimpleLightbox('.gallery__link', {});
 
-// apiService.fetchImage().then(images => {
-//   console.log(images);
-// });
 
 refs.searchForm.addEventListener('submit', onSearch);
 loadMoreBtn.refs.button.addEventListener('click', fetchImages);
@@ -36,8 +33,7 @@ function onSearch(e) {
   if (apiService.query === '') {
     return Notify.failure('Enter some text');
   }
-  //  Notify.info(`We found ${this.totalHits}`);
-  // apiService.showHits();
+ 
 
   loadMoreBtn.show();
 
@@ -60,10 +56,11 @@ function fetchImages() {
 
     const markup = renderGallery(images);
     refs.galleryContainer.insertAdjacentHTML('beforeend', markup);
-    // apiService.showHits();
-    scroll();
+    
     gallery.refresh();
     loadMoreBtn.enable();
+    scroll();
+    
   });
 }
 

@@ -24,6 +24,7 @@ img {
   justify-content: center;
   padding: 8px;
   margin-bottom: 24px;
+  // background-color: rgb(112, 86, 191);
 }
 
 
@@ -43,10 +44,6 @@ img {
   display: none;
 }
 
-.form-wrapper{
-  background-color: rgb(94, 74, 155);
-}
-/* Article List */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
